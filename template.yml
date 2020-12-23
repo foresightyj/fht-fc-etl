@@ -1,0 +1,28 @@
+ROSTemplateFormatVersion: '2015-09-01'
+Transform: 'Aliyun::Serverless-2018-04-03'
+Resources:
+  fht-fc-etl:
+    Type: 'Aliyun::Serverless::Service'
+    Properties:
+      Description: 'helloworld'
+    fht-fc-etl:
+      Type: 'Aliyun::Serverless::Function'
+      Properties:
+        Handler: ./build/index.handler
+        Runtime: nodejs12
+        CodeUri: './'
+      Events:
+        view-history:
+          Type: Log
+          Properties:
+            InvocationRole: 'acs:ram::1682716804217784:role/aliyunlogetlrole'
+            Qualifier: LATEST
+            SourceConfig:
+              Logstore: mobiledevelopment-product-views
+            JobConfig:
+              MaxRetryTime: 3
+              TriggerInterval: 5
+            LogConfig:
+              Project: post-fht360-log-development
+              Logstore: etl-view-history-logs
+            Enable: true

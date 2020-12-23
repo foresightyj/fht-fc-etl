@@ -1,0 +1,4 @@
+.fun
+node_modules
+*.txt
+build
