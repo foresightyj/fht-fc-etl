@@ -16,10 +16,15 @@ interface LogStoreEvent {
     taskId: string;
     cursorTime: number;
 }
+interface FCEventContextCredential {
+    accessKeyId: string;
+    accessKeySecret: string;
+    securityToken: string;
+}
 
-interface LogStoreEventContext {
+interface FCEventContext {
     requestId: string;
-    credentials: unknown;
+    credentials: FCEventContextCredential;
     function: {
         name: string;
         handler: string;
